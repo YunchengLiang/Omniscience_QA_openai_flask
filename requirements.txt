@@ -2,3 +2,4 @@ flask
 pymysql
 flask-sqlalchemy
 gunicorn
+flask-migrate
