@@ -14,7 +14,7 @@ function bindEmailCaptchaClick(){
       success: function (result){
         var code = result['code'];
         if(code == 200){
-          var countdown = 5;
+          var countdown = 30;
           // 开始倒计时之前，就取消按钮的点击事件
           $this.off("click");
           var timer = setInterval(function (){

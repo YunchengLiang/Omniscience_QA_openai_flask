@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 import config
-from exts import db
+from exts import db,mail
 from models import User
 from blueprints import *
 from flask_migrate import Migrate
@@ -10,6 +10,7 @@ app=Flask(__name__)
 app.config.from_object(config)
 
 db.init_app(app)
+mail.init_app(app)
 
 migrate=Migrate(app, db)
 

@@ -3,3 +3,7 @@ pymysql
 flask-sqlalchemy
 gunicorn
 flask-migrate
+flask-mail
+flask-wtf
+cryptography
+email_validator
