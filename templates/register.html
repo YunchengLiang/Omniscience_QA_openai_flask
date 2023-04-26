@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Omniscience QA - Register{% endblock %}
+
+{% block head %}
+  <script src="{{ url_for('static', filename='jquery/jquery.3.6.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/register.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+<div class="row mt-4">
+            <div class="col"></div>
+            <div class="col">
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                        <small id="emailHelp" class="form-text text-muted">We will not use this email for other purposes</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Verification Code</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="captcha">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="captcha-btn">Get Verification Code</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Username</label>
+                        <input type="text" class="form-control" name="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Confirm Password</label>
+                        <input type="password" class="form-control" name="password_confirm">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Register Now</button>
+                </form>
+            </div>
+            <div class="col"></div>
+        </div>
+{% endblock %}
