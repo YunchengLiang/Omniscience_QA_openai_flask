@@ -12,3 +12,5 @@ MAIL_USE_SSL = True
 MAIL_USERNAME = "870327837@qq.com"
 MAIL_PASSWORD = "ekhcmczqnsbqbdfb"
 MAIL_DEFAULT_SENDER = "870327837@qq.com"
+
+SECRET_KEY = "akdajfwejfwecnwejnfiwenc"

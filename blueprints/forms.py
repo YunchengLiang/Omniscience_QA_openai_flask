@@ -24,7 +24,14 @@ class RegisterForm(wtforms.Form):
         email_captcha = EmailCaptcha.query.filter_by(email=email,captcha=captcha).first()
         if not email_captcha:
             raise wtforms.ValidationError('Email not sent')
-        if email_captcha.captcha != captcha:
+        else:
             db.session.delete(email_captcha)
             db.session.commit()
-            raise wtforms.ValidationError('Captcha incorrect, please get a new verification code')
+
+class LoginForm(wtforms.Form):
+    email = wtforms.StringField(validators=[Email(message='Email address form invalid')])
+    password = wtforms.StringField(validators=[Length(min=6, max=20, message='Password form invalid, keep it between 6 and 20 characters')])
+
+class QuestionForm(wtforms.Form):
+    title = wtforms.StringField(validators=[Length(min=3, max=100, message='Title form invalid, keep it between 3 and 100 characters')])
+    content = wtforms.StringField(validators=[Length(min=3, message='Content form invalid, keep it more than 3 characters')])
