@@ -7,3 +7,4 @@ flask-mail
 flask-wtf
 cryptography
 email_validator
+openai

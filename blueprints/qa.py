@@ -1,8 +1,9 @@
-from flask import Blueprint, render_template, request,g, redirect, url_for
+from flask import Blueprint, render_template, request,g, redirect, url_for, flash
 from .forms import QuestionForm, AnswerForm
 from models import Question, Answer
 from exts import db
 from decorators import login_required
+import openai
 
 bp = Blueprint('qa', __name__, url_prefix='/')
 
@@ -35,6 +36,29 @@ def public_question():
 def question_detail(question_id):
     question=Question.query.get(question_id)
     return render_template('detail.html', question=question)
+
+@bp.route("/answer/chatgpt", methods=['POST'])
+@login_required
+def chatgpt_answer():
+    question_id=request.form.get("question_id")
+    user_id= Question.query.get(question_id).author_id
+    if user_id==g.user.id:
+        question_title = Question.query.get(question_id).title
+        question_content = Question.query.get(question_id).content
+        send_content=question_title+" "+question_content
+        openai.api_key="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"
+        result=openai.ChatCompletion.create(model="gpt-3.5-turbo",messages=[
+            {"role":"user","content":send_content}
+        ])
+        content= result["choices"][0]["message"]['content']
+        answer=Answer(content=content, question_id=question_id, author_id=2)
+        db.session.add(answer)
+        db.session.commit()
+    else:
+        flash("Only author of this question could use this function")
+    return redirect(url_for('qa.question_detail', question_id=question_id))
+
+
 
 @bp.route('/answer/public', methods=['POST'])
 @login_required

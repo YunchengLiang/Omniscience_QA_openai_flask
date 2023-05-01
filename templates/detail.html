@@ -28,6 +28,14 @@
           <button class="btn btn-primary">Comment</button>
         </div>
       </form>
+      <form action="{{ url_for('qa.chatgpt_answer') }}" method="post">
+        <div class="form-group">
+          <input type="hidden" name="question_id" value="{{ question.id }}">
+        </div>
+        <div class="form-group" style="text-align: right;">
+          <button class="btn btn-success">Ask Chatgpt</button>
+        </div>
+      </form>
       <ul class="comment-group">
         {% for answer in question.answers %}
         <li>
