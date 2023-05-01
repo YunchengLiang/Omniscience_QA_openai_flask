@@ -1,5 +1,5 @@
 import wtforms
-from wtforms.validators import Email, Length, EqualTo
+from wtforms.validators import Email, Length, EqualTo, InputRequired
 from models import User, EmailCaptcha
 from exts import db
 
@@ -35,3 +35,7 @@ class LoginForm(wtforms.Form):
 class QuestionForm(wtforms.Form):
     title = wtforms.StringField(validators=[Length(min=3, max=100, message='Title form invalid, keep it between 3 and 100 characters')])
     content = wtforms.StringField(validators=[Length(min=3, message='Content form invalid, keep it more than 3 characters')])
+
+class AnswerForm(wtforms.Form):
+    content = wtforms.StringField(validators=[Length(min=3, message='Content form invalid, keep it more than 3 characters')])
+    question_id = wtforms.IntegerField(validators=[InputRequired(message='Question id is required')])
